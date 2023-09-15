@@ -1,0 +1,21 @@
+mat-toolbar {
+  height: 10vh;
+}
+
+mat-drawer-container {
+  min-height: 80vh;
+  max-height: min-content;
+}
+
+mat-card {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.8rem;
+  box-shadow: 0px 10px 15px -3px rgb(0 0 0 / 0.5);
+}
+
+mat-chip:hover {
+  background-color: #673ab7;
+  cursor: pointer;
+  color: white;
+}

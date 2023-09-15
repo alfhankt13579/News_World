@@ -1,0 +1,140 @@
+<mat-toolbar color="primary">
+  <button
+    class="flex justify-center me-2 px-4 py-3 rounded-xl hover:bg-gray-800 hover:opacity-40"
+    (click)="sidenav.open()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="text-2xl">News World</span>
+  <button
+    class="flex justify-center ms-2 px-4 py-3 rounded-xl hover:bg-gray-800 hover:opacity-40"
+    [matMenuTriggerFor]="appMenu"
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item>Settings</button>
+  <button mat-menu-item>Help</button>
+</mat-menu>
+
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" #sidenav class="p-6 bg-gray-500 h-screen w-80">
+    <h2 class="font-semibold text-center">All Category</h2>
+    <mat-chip-listbox>
+      <div class="flex justify-center flex-wrap gap-3">
+        <div
+          *ngFor="let category of categories"
+          (click)="searchCategory(category); sidenav.close()"
+        >
+          <div
+            class="px-2 py-1 bg-[#E0E0E0] rounded-full text-base hover:bg-[#673ab7] hover:cursor-pointer hover:text-white"
+          >
+            {{ category }}
+          </div>
+        </div>
+      </div>
+    </mat-chip-listbox>
+    <h2 class="pt-3 font-semibold text-center">All Country</h2>
+    <mat-chip-listbox>
+      <div class="ps-2 flex flex-wrap gap-3">
+        <div
+          *ngFor="let countryCodes of countryCode; let i = index"
+          (click)="searchCountry(countryCodes); sidenav.close()"
+        >
+          <div
+            class="px-2 py-1 bg-[#E0E0E0] rounded-full text-base hover:bg-[#673ab7] hover:cursor-pointer hover:text-white"
+          >
+            {{ countryName[i] }}
+          </div>
+          <div [ngStyle]="{ display: 'none' }">
+            {{ countryCodes }}
+          </div>
+        </div>
+      </div>
+    </mat-chip-listbox>
+    <h2 class="pt-3 font-semibold text-center">All Sources</h2>
+    <div class="flex flex-col gap-y-4">
+      <div
+        class="flex flex-row justify-start items-center gap-x-4 pr-4 w-full rounded-xl text-lg bg-[#E0E0E0] hover:bg-[#673AB7] hover:cursor-pointer hover:text-white"
+        *ngFor="let source of mSources"
+        (click)="searchArticles(source.id); sidenav.close()"
+      >
+        <img
+          class="w-20 h-20 rounded-xl"
+          src="{{ '../../../../assets/images/' + source.id + '.png' }}"
+          alt=""
+        />
+        {{ source.name }}
+      </div>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content (click)="sidenav.close()">
+    <div class="text-3xl font-semibold text-center pt-6">Headlines</div>
+    <div class="grid grid-cols-2 gap-4 p-4">
+      <ng-container *ngFor="let article of mArticles">
+        <mat-card *ngIf="article.title != '[Removed]' && article.title != null">
+          <mat-card-header>
+            <div
+              mat-card-avatar
+              [ngStyle]="{
+                'background-image':
+                  'url(../assets/images/' + article.source.id + '.png)',
+                'background-size': '100%'
+              }"
+            ></div>
+            <mat-card-title>
+              <div class="pb-1 text-justify">{{ article.title }}</div>
+            </mat-card-title>
+            <mat-card-subtitle>
+              <div class="pb-1">
+                {{ article.source.name }}
+              </div>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <div>
+            <img
+              *ngIf="article.urlToImage"
+              mat-card-image
+              src="{{ article.urlToImage }}"
+              class="w-full h-60"
+            />
+            <mat-card-content>
+              <div class="text-lg pt-2 text-justify">
+                {{ article.description }}
+              </div>
+            </mat-card-content>
+          </div>
+
+          <mat-card-actions>
+            <button
+              class="flex justify-center items-center text-base ms-1 px-2 py-1 rounded-xl bg-gray-200 hover:bg-gray-600 hover:text-gray-100"
+              color="primary"
+            >
+              <mat-icon>comment</mat-icon>&nbsp;Comments
+            </button>
+            <button
+              class="flex justify-center items-center text-base ms-2 px-2 py-1 rounded-xl bg-gray-200 hover:bg-gray-600 hover:text-gray-100"
+              color="primary"
+            >
+              <mat-icon>share</mat-icon>&nbsp;Share
+            </button>
+            <a
+              class="flex justify-center items-center text-base ms-2 px-2 py-1 rounded-xl bg-gray-200 hover:bg-gray-600 hover:text-gray-100"
+              color="primary"
+              href="{{ article.url }}"
+            >
+              <mat-icon>visibility</mat-icon>&nbsp;More
+            </a>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<mat-toolbar class="flex justify-center items-center" color="primary">
+  <div>&copy; All Right Reserved, 2023 &reg; News World</div>
+</mat-toolbar>
