@@ -1,0 +1,25 @@
+mat-toolbar {
+  height: 10vh;
+}
+
+div.pagenotfound {
+  min-height: 80vh;
+  max-height: min-content;
+}
+
+img {
+  width: 40rem;
+}
+
+button.btn {
+  position: absolute;
+  top: 68%;
+  left: 51%;
+  transform: translate(-50%, -50%) skew(25deg, 0deg);
+  box-shadow: -5px 5px 0px 0px black;
+}
+
+button.btn:focus {
+    top: 68.5%;
+    box-shadow: -1px 1px 0px 0px black;
+}

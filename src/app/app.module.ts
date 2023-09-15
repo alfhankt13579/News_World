@@ -14,9 +14,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, MainNewsComponent],
+  declarations: [AppComponent, MainNewsComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
